@@ -1,8 +1,37 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Home";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+<section class="hero">
+    <div class="container">
+        <p class="eyebrow">Match day to training day</p>
+        <h1>Gear that keeps up with the session.</h1>
+        <p>SportsStore stocks footwear, team kit, and equipment for clubs, schools, and everyday athletes.</p>
+        <a class="btn btn-accent" asp-controller="Home" asp-action="Contact">Visit the shop</a>
+    </div>
+</section>
+
+<section class="band">
+    <div class="container">
+        <div class="row g-4">
+            <div class="col-md-4">
+                <article class="sport-card">
+                    <h2>Footwear</h2>
+                    <p>Boots, trainers, and court shoes chosen for grip, fit, and the surface you play on.</p>
+                </article>
+            </div>
+            <div class="col-md-4">
+                <article class="sport-card">
+                    <h2>Team kit</h2>
+                    <p>Jerseys, shorts, and training tops that can be ordered for a squad or a single player.</p>
+                </article>
+            </div>
+            <div class="col-md-4">
+                <article class="sport-card">
+                    <h2>Equipment</h2>
+                    <p>Balls, rackets, bags, and the small items that disappear from the kit bag first.</p>
+                </article>
+            </div>
+        </div>
+    </div>
+</section>

@@ -1,22 +1,148 @@
-html {
-  font-size: 14px;
-}
-
-@media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
-}
-
-.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
-  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+:root {
+  --ink: #102033;
+  --ink-soft: #3d4d63;
+  --paper: #f4f7f5;
+  --card: #ffffff;
+  --line: #d7e0da;
+  --field: #1f7a4d;
+  --accent: #e85d04;
 }
 
 html {
-  position: relative;
-  min-height: 100%;
+  font-size: 16px;
 }
 
 body {
-  margin-bottom: 60px;
+  margin: 0;
+  min-height: 100vh;
+  color: var(--ink);
+  background: var(--paper);
+  font-family: "Segoe UI", Tahoma, sans-serif;
+}
+
+.store-nav {
+  background: var(--ink);
+  padding: 0.85rem 0;
+}
+
+.store-nav .navbar-brand,
+.store-nav .nav-link {
+  color: #f7f4ef;
+}
+
+.store-nav .navbar-brand {
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.store-nav .nav-link:hover,
+.store-nav .nav-link:focus {
+  color: #ffd7bf;
+}
+
+.store-nav .navbar-toggler {
+  border-color: rgba(255, 255, 255, 0.4);
+}
+
+.hero {
+  background:
+    linear-gradient(115deg, rgba(16, 32, 51, 0.92), rgba(31, 122, 77, 0.78)),
+    repeating-linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0 12px, transparent 12px 24px);
+  color: #f7f4ef;
+  padding: 5.5rem 0 4.5rem;
+}
+
+.eyebrow {
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  font-size: 0.78rem;
+  margin-bottom: 0.8rem;
+  color: #ffd7bf;
+}
+
+.hero h1 {
+  font-size: clamp(2.2rem, 5vw, 4rem);
+  max-width: 14ch;
+  line-height: 1.05;
+  margin-bottom: 1rem;
+}
+
+.hero p {
+  max-width: 38rem;
+  font-size: 1.1rem;
+}
+
+.btn-accent {
+  background: var(--accent);
+  border: 0;
+  color: white;
+  font-weight: 600;
+  padding: 0.75rem 1.2rem;
+}
+
+.btn-accent:hover,
+.btn-accent:focus {
+  background: #c44c02;
+  color: white;
+}
+
+.band {
+  padding: 3.5rem 0;
+}
+
+.sport-card {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-top: 4px solid var(--field);
+  border-radius: 0.4rem;
+  height: 100%;
+  padding: 1.4rem;
+}
+
+.sport-card h2 {
+  font-size: 1.25rem;
+}
+
+.sport-card p,
+.page-copy {
+  color: var(--ink-soft);
+}
+
+.page-panel {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 0.4rem;
+  padding: 2rem;
+}
+
+.store-footer {
+  background: var(--ink);
+  color: #d5ddd8;
+  padding: 1.6rem 0;
+}
+
+.store-footer a {
+  color: #ffd7bf;
+  margin-left: 1rem;
+  text-decoration: none;
+}
+
+.store-footer a:hover {
+  text-decoration: underline;
+}
+
+@media (max-width: 767.98px) {
+  .hero {
+    padding: 3.2rem 0 2.6rem;
+  }
+
+  .store-footer a {
+    margin-left: 0;
+    margin-right: 1rem;
+  }
+
+  .store-footer .text-md-end {
+    text-align: left !important;
+  }
 }
