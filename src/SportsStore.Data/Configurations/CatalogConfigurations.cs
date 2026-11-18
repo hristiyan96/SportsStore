@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using SportsStore.Core.Entities;
+using SportsStore.Data.Seeding;
 
 namespace SportsStore.Data.Configurations;
 
@@ -11,6 +12,7 @@ public class CategoryConfiguration : IEntityTypeConfiguration<Category>
         builder.Property(c => c.Name).HasMaxLength(80).IsRequired();
         builder.Property(c => c.Description).HasMaxLength(500);
         builder.HasIndex(c => c.Name).IsUnique();
+        builder.HasData(CatalogSeed.Categories);
     }
 }
 
@@ -21,6 +23,7 @@ public class BrandConfiguration : IEntityTypeConfiguration<Brand>
         builder.Property(b => b.Name).HasMaxLength(80).IsRequired();
         builder.Property(b => b.Country).HasMaxLength(80).IsRequired();
         builder.HasIndex(b => b.Name).IsUnique();
+        builder.HasData(CatalogSeed.Brands);
     }
 }
 
@@ -32,6 +35,7 @@ public class SupplierConfiguration : IEntityTypeConfiguration<Supplier>
         builder.Property(s => s.Email).HasMaxLength(160).IsRequired();
         builder.Property(s => s.Phone).HasMaxLength(40).IsRequired();
         builder.Property(s => s.Address).HasMaxLength(240).IsRequired();
+        builder.HasData(CatalogSeed.Suppliers);
     }
 }
 
@@ -68,5 +72,7 @@ public class ProductConfiguration : IEntityTypeConfiguration<Product>
             .WithMany(s => s.Products)
             .HasForeignKey(p => p.SupplierId)
             .OnDelete(DeleteBehavior.Restrict);
+
+        builder.HasData(CatalogSeed.Products);
     }
 }
