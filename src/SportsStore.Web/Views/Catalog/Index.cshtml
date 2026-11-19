@@ -1,0 +1,75 @@
+@model SportsStore.Services.Catalog.CatalogPage
+@{
+    ViewData["Title"] = "Catalog";
+}
+
+<section class="band">
+    <div class="container">
+        <p class="eyebrow">In stock</p>
+        <h1 class="catalog-title">Catalog</h1>
+
+        <form method="get" asp-action="Index" class="catalog-filters">
+            <label class="visually-hidden" for="search">Search</label>
+            <input id="search" name="search" value="@Model.Search" class="form-control" placeholder="Name, brand, or SKU" />
+
+            <label class="visually-hidden" for="categoryId">Category</label>
+            <select id="categoryId" name="categoryId" class="form-select">
+                <option value="">All categories</option>
+                @foreach (var category in Model.Categories)
+                {
+                    if (Model.CategoryId == category.Id)
+                    {
+                        <option value="@category.Id" selected>@category.Name</option>
+                    }
+                    else
+                    {
+                        <option value="@category.Id">@category.Name</option>
+                    }
+                }
+            </select>
+
+            <button type="submit" class="btn btn-accent">Search</button>
+        </form>
+
+        <p class="catalog-count">@Model.TotalCount @(Model.TotalCount == 1 ? "product" : "products")</p>
+
+        @if (Model.Items.Count == 0)
+        {
+            <div class="page-panel">
+                <p class="mb-0">Nothing in stock matches that search. Try another name, or clear the category.</p>
+            </div>
+        }
+        else
+        {
+            <div class="row g-4">
+                @foreach (var item in Model.Items)
+                {
+                    <div class="col-md-6 col-lg-4">
+                        <article class="sport-card">
+                            <p class="catalog-meta">@item.CategoryName · @item.BrandName</p>
+                            <h2>@item.Name</h2>
+                            <p>@item.Sku</p>
+                            <p class="catalog-price">@item.Price.ToString("0.00") EUR</p>
+                            <p class="mb-0">@item.StockQuantity in stock</p>
+                        </article>
+                    </div>
+                }
+            </div>
+        }
+
+        @if (Model.TotalPages > 1)
+        {
+            <nav class="catalog-pager" aria-label="Catalog pages">
+                @if (Model.Page > 1)
+                {
+                    <a asp-action="Index" asp-route-search="@Model.Search" asp-route-categoryId="@Model.CategoryId" asp-route-page="@(Model.Page - 1)">Previous</a>
+                }
+                <span>Page @Model.Page of @Model.TotalPages</span>
+                @if (Model.Page < Model.TotalPages)
+                {
+                    <a asp-action="Index" asp-route-search="@Model.Search" asp-route-categoryId="@Model.CategoryId" asp-route-page="@(Model.Page + 1)">Next</a>
+                }
+            </nav>
+        }
+    </div>
+</section>
