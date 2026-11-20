@@ -17,4 +17,15 @@ public class CatalogController : Controller
         var model = await _catalog.GetPageAsync(search, categoryId, page, cancellationToken);
         return View(model);
     }
+
+    public async Task<IActionResult> Details(int id, CancellationToken cancellationToken = default)
+    {
+        var product = await _catalog.GetDetailsAsync(id, cancellationToken);
+        if (product is null)
+        {
+            return NotFound();
+        }
+
+        return View(product);
+    }
 }

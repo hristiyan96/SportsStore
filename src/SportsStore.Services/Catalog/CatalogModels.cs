@@ -17,6 +17,27 @@ public class CatalogItem
     public string BrandName { get; init; } = string.Empty;
 }
 
+public class ProductDetails
+{
+    public int Id { get; init; }
+
+    public string Name { get; init; } = string.Empty;
+
+    public string Description { get; init; } = string.Empty;
+
+    public string Sku { get; init; } = string.Empty;
+
+    public decimal Price { get; init; }
+
+    public int StockQuantity { get; init; }
+
+    public string CategoryName { get; init; } = string.Empty;
+
+    public string BrandName { get; init; } = string.Empty;
+
+    public string BrandCountry { get; init; } = string.Empty;
+}
+
 public class CategoryOption
 {
     public int Id { get; init; }

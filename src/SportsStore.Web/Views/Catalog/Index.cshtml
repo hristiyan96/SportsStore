@@ -45,13 +45,7 @@
                 @foreach (var item in Model.Items)
                 {
                     <div class="col-md-6 col-lg-4">
-                        <article class="sport-card">
-                            <p class="catalog-meta">@item.CategoryName · @item.BrandName</p>
-                            <h2>@item.Name</h2>
-                            <p>@item.Sku</p>
-                            <p class="catalog-price">@item.Price.ToString("0.00") EUR</p>
-                            <p class="mb-0">@item.StockQuantity in stock</p>
-                        </article>
+                        <partial name="_ProductCard" model="item" />
                     </div>
                 }
             </div>

@@ -74,4 +74,24 @@ public class CatalogService : ICatalogService
             TotalCount = totalCount
         };
     }
+
+    public async Task<ProductDetails?> GetDetailsAsync(int id, CancellationToken cancellationToken = default)
+    {
+        return await _db.Products
+            .AsNoTracking()
+            .Where(p => p.Id == id && p.IsActive)
+            .Select(p => new ProductDetails
+            {
+                Id = p.Id,
+                Name = p.Name,
+                Description = p.Description,
+                Sku = p.Sku,
+                Price = p.Price,
+                StockQuantity = p.StockQuantity,
+                CategoryName = p.Category.Name,
+                BrandName = p.Brand.Name,
+                BrandCountry = p.Brand.Country
+            })
+            .FirstOrDefaultAsync(cancellationToken);
+    }
 }

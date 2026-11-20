@@ -104,6 +104,21 @@ body {
   font-size: 1.25rem;
 }
 
+.sport-card h2 a {
+  color: var(--ink);
+  text-decoration: none;
+}
+
+.sport-card h2 a:hover,
+.sport-card h2 a:focus {
+  color: var(--field);
+}
+
+.product-detail a {
+  color: var(--field);
+  font-weight: 600;
+}
+
 .sport-card p,
 .page-copy {
   color: var(--ink-soft);

@@ -1,0 +1,11 @@
+@model SportsStore.Services.Catalog.CatalogItem
+
+<article class="sport-card">
+    <p class="catalog-meta">@Model.CategoryName · @Model.BrandName</p>
+    <h2>
+        <a asp-controller="Catalog" asp-action="Details" asp-route-id="@Model.Id">@Model.Name</a>
+    </h2>
+    <p>@Model.Sku</p>
+    <p class="catalog-price">@Model.Price.ToString("0.00") EUR</p>
+    <p class="mb-0">@Model.StockQuantity in stock</p>
+</article>

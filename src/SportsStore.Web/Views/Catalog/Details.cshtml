@@ -1,0 +1,19 @@
+@model SportsStore.Services.Catalog.ProductDetails
+@{
+    ViewData["Title"] = Model.Name;
+}
+
+<section class="band">
+    <div class="container">
+        <p class="eyebrow">@Model.CategoryName</p>
+        <div class="page-panel product-detail">
+            <h1>@Model.Name</h1>
+            <p class="catalog-meta">@Model.BrandName · @Model.BrandCountry</p>
+            <p class="page-copy">@Model.Description</p>
+            <p>SKU @Model.Sku</p>
+            <p class="catalog-price">@Model.Price.ToString("0.00") EUR</p>
+            <p>@(Model.StockQuantity == 0 ? "Out of stock" : $"{Model.StockQuantity} in stock")</p>
+            <a asp-action="Index">Back to the catalog</a>
+        </div>
+    </div>
+</section>
