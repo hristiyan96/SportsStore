@@ -114,9 +114,68 @@ body {
   color: var(--field);
 }
 
-.product-detail a {
+.product-detail a,
+.page-panel a {
   color: var(--field);
   font-weight: 600;
+}
+
+.cart-add,
+.cart-qty {
+  display: flex;
+  gap: 0.6rem;
+  align-items: center;
+  margin: 1rem 0;
+}
+
+.cart-add input,
+.cart-qty input {
+  max-width: 6rem;
+}
+
+.cart-error {
+  color: #9b2c2c;
+  font-weight: 600;
+}
+
+.cart-line {
+  display: grid;
+  grid-template-columns: 1.4fr auto auto auto;
+  gap: 1rem;
+  align-items: center;
+  padding: 1rem 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.cart-line h2 {
+  font-size: 1.15rem;
+  margin-bottom: 0.2rem;
+}
+
+.cart-line h2 a {
+  color: var(--ink);
+  text-decoration: none;
+}
+
+.cart-line .cart-qty {
+  margin: 0;
+}
+
+.cart-total {
+  font-weight: 700;
+  margin: 1.2rem 0 0;
+}
+
+.cart-remove {
+  color: var(--accent);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+@media (max-width: 767.98px) {
+  .cart-line {
+    grid-template-columns: 1fr;
+  }
 }
 
 .sport-card p,

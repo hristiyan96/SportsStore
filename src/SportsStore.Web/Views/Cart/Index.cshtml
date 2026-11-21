@@ -1,0 +1,52 @@
+@model SportsStore.Services.Cart.ShoppingCart
+@{
+    ViewData["Title"] = "Cart";
+}
+
+<section class="band">
+    <div class="container">
+        <p class="eyebrow">Your bag</p>
+        <h1 class="catalog-title">Cart</h1>
+
+        @if (!string.IsNullOrEmpty(Model.Error))
+        {
+            <p class="cart-error">@Model.Error</p>
+        }
+
+        @if (Model.Items.Count == 0)
+        {
+            <div class="page-panel">
+                <p>The cart is empty.</p>
+                <a asp-controller="Catalog" asp-action="Index">Browse the catalog</a>
+            </div>
+        }
+        else
+        {
+            <div class="page-panel">
+                @foreach (var item in Model.Items)
+                {
+                    <article class="cart-line">
+                        <div>
+                            <h2>
+                                <a asp-controller="Catalog" asp-action="Details" asp-route-id="@item.ProductId">@item.Name</a>
+                            </h2>
+                            <p class="catalog-meta">@item.Sku · @item.UnitPrice.ToString("0.00") EUR · @item.StockQuantity in stock</p>
+                        </div>
+                        <form asp-action="Update" method="post" class="cart-qty">
+                            <input type="hidden" name="productId" value="@item.ProductId" />
+                            <label class="visually-hidden" for="quantity-@item.ProductId">Quantity</label>
+                            <input id="quantity-@item.ProductId" name="quantity" type="number" min="1" max="@item.StockQuantity" value="@item.Quantity" class="form-control" />
+                            <button type="submit" class="btn btn-accent">Update</button>
+                        </form>
+                        <p class="catalog-price">@item.LineTotal.ToString("0.00") EUR</p>
+                        <form asp-action="Remove" method="post">
+                            <input type="hidden" name="productId" value="@item.ProductId" />
+                            <button type="submit" class="btn btn-link cart-remove">Remove</button>
+                        </form>
+                    </article>
+                }
+                <p class="cart-total">Total @Model.Total.ToString("0.00") EUR</p>
+            </div>
+        }
+    </div>
+</section>
