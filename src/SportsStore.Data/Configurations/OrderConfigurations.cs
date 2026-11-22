@@ -20,6 +20,7 @@ public class CustomerOrderConfiguration : IEntityTypeConfiguration<CustomerOrder
         builder.HasOne(o => o.User)
             .WithMany(u => u.Orders)
             .HasForeignKey(o => o.UserId)
+            .IsRequired(false)
             .OnDelete(DeleteBehavior.Restrict);
     }
 }

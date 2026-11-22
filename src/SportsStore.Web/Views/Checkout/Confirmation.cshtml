@@ -1,0 +1,21 @@
+@model SportsStore.Services.Orders.OrderReceipt
+@{
+    ViewData["Title"] = "Order " + Model.Id;
+}
+
+<section class="band">
+    <div class="container">
+        <p class="eyebrow">Placed</p>
+        <div class="page-panel">
+            <h1>Order @Model.Id</h1>
+            <p class="page-copy">@Model.CustomerName<br />@Model.ShippingAddress<br />@Model.City<br />@Model.Phone</p>
+            <p>Status: @Model.Status</p>
+            @foreach (var line in Model.Lines)
+            {
+                <p>@line.Quantity × @line.ProductName — @line.LineTotal.ToString("0.00") EUR</p>
+            }
+            <p class="cart-total">Total @Model.Total.ToString("0.00") EUR</p>
+            <a asp-controller="Catalog" asp-action="Index">Back to the catalog</a>
+        </div>
+    </div>
+</section>

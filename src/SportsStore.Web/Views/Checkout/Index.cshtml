@@ -1,0 +1,58 @@
+@model SportsStore.Web.Models.CheckoutForm
+@using SportsStore.Services.Cart
+@{
+    ViewData["Title"] = "Checkout";
+    var cart = (ShoppingCart)ViewData["Cart"]!;
+}
+
+<section class="band">
+    <div class="container">
+        <p class="eyebrow">Delivery</p>
+        <h1 class="catalog-title">Checkout</h1>
+
+        <div class="row g-4">
+            <div class="col-lg-7">
+                <form method="post" class="page-panel" asp-action="Index">
+                    <div asp-validation-summary="ModelOnly" class="cart-error"></div>
+
+                    <div class="mb-3">
+                        <label asp-for="CustomerName" class="form-label"></label>
+                        <input asp-for="CustomerName" class="form-control" />
+                        <span asp-validation-for="CustomerName" class="cart-error"></span>
+                    </div>
+                    <div class="mb-3">
+                        <label asp-for="Phone" class="form-label"></label>
+                        <input asp-for="Phone" class="form-control" />
+                        <span asp-validation-for="Phone" class="cart-error"></span>
+                    </div>
+                    <div class="mb-3">
+                        <label asp-for="ShippingAddress" class="form-label"></label>
+                        <input asp-for="ShippingAddress" class="form-control" />
+                        <span asp-validation-for="ShippingAddress" class="cart-error"></span>
+                    </div>
+                    <div class="mb-3">
+                        <label asp-for="City" class="form-label"></label>
+                        <input asp-for="City" class="form-control" />
+                        <span asp-validation-for="City" class="cart-error"></span>
+                    </div>
+
+                    <button type="submit" class="btn btn-accent">Place order</button>
+                </form>
+            </div>
+            <div class="col-lg-5">
+                <div class="page-panel">
+                    <h2>In this order</h2>
+                    @foreach (var item in cart.Items)
+                    {
+                        <p>@item.Quantity × @item.Name</p>
+                    }
+                    <p class="cart-total">Total @cart.Total.ToString("0.00") EUR</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

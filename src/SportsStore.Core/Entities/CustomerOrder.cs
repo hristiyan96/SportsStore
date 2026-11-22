@@ -4,9 +4,9 @@ namespace SportsStore.Core.Entities;
 
 public class CustomerOrder : BaseEntity
 {
-    public string UserId { get; set; } = string.Empty;
+    public string? UserId { get; set; }
 
-    public ApplicationUser User { get; set; } = null!;
+    public ApplicationUser? User { get; set; }
 
     public OrderStatus Status { get; set; } = OrderStatus.Pending;
 

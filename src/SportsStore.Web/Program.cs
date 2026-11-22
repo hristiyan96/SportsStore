@@ -2,6 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using SportsStore.Data;
 using SportsStore.Services.Cart;
 using SportsStore.Services.Catalog;
+using SportsStore.Services.Orders;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,6 +11,7 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 
 builder.Services.AddScoped<ICatalogService, CatalogService>();
 builder.Services.AddScoped<ICartService, CartService>();
+builder.Services.AddScoped<IOrderService, OrderService>();
 builder.Services.AddDistributedMemoryCache();
 builder.Services.AddSession(options =>
 {
