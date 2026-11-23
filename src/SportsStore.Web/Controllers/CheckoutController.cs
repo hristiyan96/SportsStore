@@ -51,7 +51,7 @@ public class CheckoutController : Controller
             Phone = form.Phone,
             ShippingAddress = form.ShippingAddress,
             City = form.City
-        }, cancellationToken);
+        }, User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value, cancellationToken);
 
         if (placed.Error is not null || placed.OrderId is null)
         {

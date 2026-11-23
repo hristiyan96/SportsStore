@@ -15,7 +15,7 @@ public class OrderService : IOrderService
         _db = db;
     }
 
-    public async Task<PlacedOrder> PlaceAsync(IReadOnlyList<StoredCartLine> lines, CheckoutDetails details, CancellationToken cancellationToken = default)
+    public async Task<PlacedOrder> PlaceAsync(IReadOnlyList<StoredCartLine> lines, CheckoutDetails details, string? userId = null, CancellationToken cancellationToken = default)
     {
         var name = details.CustomerName.Trim();
         var phone = details.Phone.Trim();
@@ -72,6 +72,7 @@ public class OrderService : IOrderService
             ShippingAddress = address,
             City = city,
             Status = OrderStatus.Pending,
+            UserId = string.IsNullOrWhiteSpace(userId) ? null : userId,
             CreatedOn = DateTime.UtcNow,
             Items = requested.Select(line =>
             {

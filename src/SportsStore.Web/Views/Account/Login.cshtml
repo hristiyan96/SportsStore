@@ -1,0 +1,32 @@
+@model SportsStore.Web.Models.LoginForm
+@{
+    ViewData["Title"] = "Log in";
+}
+
+<section class="band">
+    <div class="container">
+        <div class="page-panel account-form">
+            <p class="eyebrow">Account</p>
+            <h1>Log in</h1>
+            <form method="post" asp-action="Login">
+                <input type="hidden" asp-for="ReturnUrl" />
+                <div asp-validation-summary="ModelOnly" class="cart-error"></div>
+                <div class="mb-3">
+                    <label asp-for="Email" class="form-label"></label>
+                    <input asp-for="Email" class="form-control" />
+                    <span asp-validation-for="Email" class="cart-error"></span>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="Password" class="form-label"></label>
+                    <input asp-for="Password" class="form-control" />
+                    <span asp-validation-for="Password" class="cart-error"></span>
+                </div>
+                <button type="submit" class="btn btn-accent">Log in</button>
+            </form>
+        </div>
+    </div>
+</section>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

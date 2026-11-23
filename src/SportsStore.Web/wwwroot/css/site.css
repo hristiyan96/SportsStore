@@ -230,6 +230,22 @@ body {
   }
 }
 
+.store-nav .store-logout {
+  color: #f7f4ef;
+  text-decoration: none;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+}
+
+.store-nav .store-logout:hover,
+.store-nav .store-logout:focus {
+  color: #ffd7bf;
+}
+
+.account-form {
+  max-width: 36rem;
+}
+
 .store-footer {
   background: var(--ink);
   color: #d5ddd8;

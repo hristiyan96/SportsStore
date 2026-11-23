@@ -22,3 +22,12 @@ dotnet run --project src/SportsStore.Web
 ```
 
 The database connection string is in `src/SportsStore.Web/appsettings.json`.
+
+## Development accounts
+
+Starting the app in Development creates two roles, User and Administrator, and one administrator if that account does not exist yet:
+
+- Email: `admin@sportsstore.local`
+- Password: `Admin123!`
+
+That password is only for the local database. Registration from the site creates a User account.

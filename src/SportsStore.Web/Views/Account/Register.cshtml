@@ -1,0 +1,46 @@
+@model SportsStore.Web.Models.RegisterForm
+@{
+    ViewData["Title"] = "Register";
+}
+
+<section class="band">
+    <div class="container">
+        <div class="page-panel account-form">
+            <p class="eyebrow">Account</p>
+            <h1>Register</h1>
+            <form method="post" asp-action="Register">
+                <div asp-validation-summary="ModelOnly" class="cart-error"></div>
+                <div class="mb-3">
+                    <label asp-for="FirstName" class="form-label"></label>
+                    <input asp-for="FirstName" class="form-control" />
+                    <span asp-validation-for="FirstName" class="cart-error"></span>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="LastName" class="form-label"></label>
+                    <input asp-for="LastName" class="form-control" />
+                    <span asp-validation-for="LastName" class="cart-error"></span>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="Email" class="form-label"></label>
+                    <input asp-for="Email" class="form-control" />
+                    <span asp-validation-for="Email" class="cart-error"></span>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="Password" class="form-label"></label>
+                    <input asp-for="Password" class="form-control" />
+                    <span asp-validation-for="Password" class="cart-error"></span>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="ConfirmPassword" class="form-label"></label>
+                    <input asp-for="ConfirmPassword" class="form-control" />
+                    <span asp-validation-for="ConfirmPassword" class="cart-error"></span>
+                </div>
+                <button type="submit" class="btn btn-accent">Create account</button>
+            </form>
+        </div>
+    </div>
+</section>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
