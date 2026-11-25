@@ -1,0 +1,70 @@
+@using SportsStore.Services.Admin
+@model ProductForm
+@{
+    var categories = (IReadOnlyList<CatalogChoice>)ViewData["Categories"]!;
+    var brands = (IReadOnlyList<CatalogChoice>)ViewData["Brands"]!;
+    var suppliers = (IReadOnlyList<CatalogChoice>)ViewData["Suppliers"]!;
+}
+
+<div asp-validation-summary="ModelOnly" class="cart-error"></div>
+<div class="mb-3">
+    <label asp-for="Name" class="form-label"></label>
+    <input asp-for="Name" class="form-control" />
+    <span asp-validation-for="Name" class="cart-error"></span>
+</div>
+<div class="mb-3">
+    <label asp-for="Description" class="form-label"></label>
+    <textarea asp-for="Description" class="form-control" rows="3"></textarea>
+    <span asp-validation-for="Description" class="cart-error"></span>
+</div>
+<div class="mb-3">
+    <label asp-for="Sku" class="form-label"></label>
+    <input asp-for="Sku" class="form-control" />
+    <span asp-validation-for="Sku" class="cart-error"></span>
+</div>
+<div class="row">
+    <div class="col-md-6 mb-3">
+        <label asp-for="Price" class="form-label"></label>
+        <input asp-for="Price" class="form-control" />
+        <span asp-validation-for="Price" class="cart-error"></span>
+    </div>
+    <div class="col-md-6 mb-3">
+        <label asp-for="StockQuantity" class="form-label"></label>
+        <input asp-for="StockQuantity" class="form-control" />
+        <span asp-validation-for="StockQuantity" class="cart-error"></span>
+    </div>
+</div>
+<div class="mb-3">
+    <label asp-for="CategoryId" class="form-label"></label>
+    <select asp-for="CategoryId" class="form-select">
+        <option value="">Choose</option>
+        @foreach (var category in categories)
+        {
+            <option value="@category.Id">@category.Name</option>
+        }
+    </select>
+</div>
+<div class="mb-3">
+    <label asp-for="BrandId" class="form-label"></label>
+    <select asp-for="BrandId" class="form-select">
+        <option value="">Choose</option>
+        @foreach (var brand in brands)
+        {
+            <option value="@brand.Id">@brand.Name</option>
+        }
+    </select>
+</div>
+<div class="mb-3">
+    <label asp-for="SupplierId" class="form-label"></label>
+    <select asp-for="SupplierId" class="form-select">
+        <option value="">Choose</option>
+        @foreach (var supplier in suppliers)
+        {
+            <option value="@supplier.Id">@supplier.Name</option>
+        }
+    </select>
+</div>
+<div class="mb-3 form-check">
+    <input asp-for="IsActive" class="form-check-input" />
+    <label asp-for="IsActive" class="form-check-label"></label>
+</div>

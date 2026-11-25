@@ -1,0 +1,21 @@
+@model SportsStore.Web.Models.ProductForm
+@{
+    ViewData["Title"] = "Add product";
+}
+
+<section class="band">
+    <div class="container">
+        <div class="page-panel account-form">
+            <p class="eyebrow">Shop floor</p>
+            <h1>Add product</h1>
+            <form method="post" asp-action="Create">
+                <partial name="_ProductFields" model="Model" />
+                <button type="submit" class="btn btn-accent">Save</button>
+            </form>
+        </div>
+    </div>
+</section>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

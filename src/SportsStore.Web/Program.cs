@@ -32,6 +32,7 @@ builder.Services.AddScoped<ICatalogService, CatalogService>();
 builder.Services.AddScoped<ICartService, CartService>();
 builder.Services.AddScoped<IOrderService, OrderService>();
 builder.Services.AddScoped<IDashboardService, DashboardService>();
+builder.Services.AddScoped<IProductAdminService, ProductAdminService>();
 builder.Services.AddDistributedMemoryCache();
 builder.Services.AddSession(options =>
 {
