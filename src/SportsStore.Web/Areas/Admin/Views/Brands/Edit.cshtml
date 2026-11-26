@@ -1,0 +1,21 @@
+@model SportsStore.Web.Models.BrandForm
+@{
+    ViewData["Title"] = "Edit brand";
+}
+
+<section class="band">
+    <div class="container">
+        <div class="page-panel account-form">
+            <p class="eyebrow">Shop floor</p>
+            <h1>Edit brand</h1>
+            <form method="post">
+                <partial name="_BrandFields" model="Model" />
+                <button type="submit" class="btn btn-accent">Save</button>
+            </form>
+        </div>
+    </div>
+</section>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

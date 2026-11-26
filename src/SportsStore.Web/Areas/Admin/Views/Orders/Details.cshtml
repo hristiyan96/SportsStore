@@ -1,0 +1,45 @@
+@using SportsStore.Core.Enums
+@model SportsStore.Services.Admin.AdminOrderDetail
+@{
+    ViewData["Title"] = $"Order {Model.Id}";
+}
+
+<section class="band">
+    <div class="container">
+        <div class="page-panel">
+            <p class="eyebrow">Shop floor</p>
+            <h1>Order @Model.Id</h1>
+            <p class="catalog-meta">@Model.CreatedOn.ToString("dd MMM yyyy HH:mm", System.Globalization.CultureInfo.InvariantCulture) UTC</p>
+            <p>@Model.CustomerName<br />@Model.Phone<br />@Model.ShippingAddress, @Model.City</p>
+            @foreach (var line in Model.Lines)
+            {
+                <article class="cart-line">
+                    <div>
+                        <h2>@line.ProductName</h2>
+                        <p class="catalog-meta">@line.Quantity × @line.UnitPrice.ToString("0.00") EUR</p>
+                    </div>
+                    <p class="catalog-price">@((line.Quantity * line.UnitPrice).ToString("0.00")) EUR</p>
+                </article>
+            }
+            <p class="catalog-price">@Model.Total.ToString("0.00") EUR</p>
+            <form asp-action="UpdateStatus" asp-route-id="@Model.Id" method="post" class="d-flex gap-2 align-items-center">
+                <input type="hidden" name="returnTo" value="details" />
+                <select name="status" class="form-select">
+                    @foreach (var status in Enum.GetValues<OrderStatus>())
+                    {
+                        if (status == Model.Status)
+                        {
+                            <option value="@status" selected>@status</option>
+                        }
+                        else
+                        {
+                            <option value="@status">@status</option>
+                        }
+                    }
+                </select>
+                <button type="submit" class="btn btn-accent">Save status</button>
+            </form>
+            <p class="mt-3 mb-0"><a asp-action="Index">All orders</a></p>
+        </div>
+    </div>
+</section>

@@ -1,0 +1,21 @@
+@model SportsStore.Web.Models.CategoryForm
+@{
+    ViewData["Title"] = "Add category";
+}
+
+<section class="band">
+    <div class="container">
+        <div class="page-panel account-form">
+            <p class="eyebrow">Shop floor</p>
+            <h1>Add category</h1>
+            <form method="post" asp-action="Create">
+                <partial name="_CategoryFields" model="Model" />
+                <button type="submit" class="btn btn-accent">Save</button>
+            </form>
+        </div>
+    </div>
+</section>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

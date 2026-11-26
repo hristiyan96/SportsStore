@@ -7,7 +7,12 @@
     <div class="container">
         <p class="eyebrow">Shop floor</p>
         <h1 class="catalog-title">Dashboard</h1>
-        <p><a asp-controller="Products" asp-action="Index">Manage products</a></p>
+        <p>
+            <a asp-controller="Products" asp-action="Index">Products</a>
+            · <a asp-controller="Orders" asp-action="Index">Orders</a>
+            · <a asp-controller="Categories" asp-action="Index">Categories</a>
+            · <a asp-controller="Brands" asp-action="Index">Brands</a>
+        </p>
         <div class="row g-4">
             <div class="col-md-4">
                 <article class="sport-card">
