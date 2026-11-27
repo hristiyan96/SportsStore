@@ -7,6 +7,7 @@ using SportsStore.Services.Cart;
 using SportsStore.Services.Catalog;
 using SportsStore.Services.Admin;
 using SportsStore.Services.Orders;
+using SportsStore.Services.Reviews;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -35,13 +36,17 @@ builder.Services.AddScoped<IDashboardService, DashboardService>();
 builder.Services.AddScoped<IProductAdminService, ProductAdminService>();
 builder.Services.AddScoped<IOrderAdminService, OrderAdminService>();
 builder.Services.AddScoped<ICatalogAdminService, CatalogAdminService>();
+builder.Services.AddScoped<IReviewService, ReviewService>();
 builder.Services.AddDistributedMemoryCache();
 builder.Services.AddSession(options =>
 {
     options.Cookie.HttpOnly = true;
     options.Cookie.IsEssential = true;
 });
-builder.Services.AddControllersWithViews();
+builder.Services.AddControllersWithViews(options =>
+{
+    options.Filters.Add(new Microsoft.AspNetCore.Mvc.AutoValidateAntiforgeryTokenAttribute());
+});
 
 var app = builder.Build();
 
@@ -53,11 +58,11 @@ if (app.Environment.IsDevelopment())
     await IdentitySeeder.SeedAsync(scope.ServiceProvider);
 }
 
-// Configure the HTTP request pipeline.
+app.UseExceptionHandler("/Home/Error");
+app.UseStatusCodePagesWithReExecute("/Home/Status", "?code={0}");
+
 if (!app.Environment.IsDevelopment())
 {
-    app.UseExceptionHandler("/Home/Error");
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
 

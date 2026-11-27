@@ -1,32 +1,88 @@
-@model SportsStore.Services.Catalog.ProductDetails
+@model SportsStore.Web.Models.ProductPage
 @{
-    ViewData["Title"] = Model.Name;
+    ViewData["Title"] = Model.Product.Name;
+    var product = Model.Product;
 }
 
 <section class="band">
     <div class="container">
-        <p class="eyebrow">@Model.CategoryName</p>
+        <p class="eyebrow">@product.CategoryName</p>
         <div class="page-panel product-detail">
-            <h1>@Model.Name</h1>
-            <p class="catalog-meta">@Model.BrandName · @Model.BrandCountry</p>
-            <p class="page-copy">@Model.Description</p>
-            <p>SKU @Model.Sku</p>
-            <p class="catalog-price">@Model.Price.ToString("0.00") EUR</p>
-            <p>@(Model.StockQuantity == 0 ? "Out of stock" : $"{Model.StockQuantity} in stock")</p>
+            <h1>@product.Name</h1>
+            <p class="catalog-meta">@product.BrandName · @product.BrandCountry</p>
+            <p class="page-copy">@product.Description</p>
+            <p>SKU @product.Sku</p>
+            <p class="catalog-price">@product.Price.ToString("0.00") EUR</p>
+            <p>@(product.StockQuantity == 0 ? "Out of stock" : $"{product.StockQuantity} in stock")</p>
             @if (TempData["CartError"] is string error)
             {
                 <p class="cart-error">@error</p>
             }
-            @if (Model.StockQuantity > 0)
+            @if (product.StockQuantity > 0)
             {
                 <form asp-controller="Cart" asp-action="Add" method="post" class="cart-add">
-                    <input type="hidden" name="productId" value="@Model.Id" />
+                    <input type="hidden" name="productId" value="@product.Id" />
                     <label for="quantity">Quantity</label>
-                    <input id="quantity" name="quantity" type="number" min="1" max="@Model.StockQuantity" value="1" class="form-control" />
+                    <input id="quantity" name="quantity" type="number" min="1" max="@product.StockQuantity" value="1" class="form-control" />
                     <button type="submit" class="btn btn-accent">Add to cart</button>
                 </form>
             }
             <a asp-action="Index">Back to the catalog</a>
         </div>
+
+        <div class="page-panel product-detail">
+            <h2>Reviews</h2>
+            @if (Model.Reviews.Count == 0)
+            {
+                <p>No reviews yet.</p>
+            }
+            @foreach (var review in Model.Reviews)
+            {
+                <article class="cart-line">
+                    <div>
+                        <h3>@(string.IsNullOrWhiteSpace(review.Author) ? "Customer" : review.Author)</h3>
+                        <p class="catalog-meta">@review.Rating / 5 · @review.CreatedOn.ToString("dd MMM yyyy", System.Globalization.CultureInfo.InvariantCulture)</p>
+                        <p class="page-copy">@review.Comment</p>
+                    </div>
+                </article>
+            }
+
+            @if (Model.AlreadyReviewed)
+            {
+                <p class="mb-0">You have already reviewed this product.</p>
+            }
+            else if (Model.CanReview)
+            {
+                <form asp-action="Review" asp-route-id="@product.Id" method="post" class="account-form">
+                    <div asp-validation-summary="ModelOnly" class="cart-error"></div>
+                    <div class="mb-3">
+                        <label asp-for="Rating" class="form-label">Rating</label>
+                        <select asp-for="Rating" class="form-select">
+                            <option value="">Choose</option>
+                            <option value="5">5</option>
+                            <option value="4">4</option>
+                            <option value="3">3</option>
+                            <option value="2">2</option>
+                            <option value="1">1</option>
+                        </select>
+                        <span asp-validation-for="Rating" class="cart-error"></span>
+                    </div>
+                    <div class="mb-3">
+                        <label asp-for="Comment" class="form-label">Review</label>
+                        <textarea asp-for="Comment" class="form-control" rows="3"></textarea>
+                        <span asp-validation-for="Comment" class="cart-error"></span>
+                    </div>
+                    <button type="submit" class="btn btn-accent">Publish review</button>
+                </form>
+            }
+            else
+            {
+                <p class="mb-0"><a asp-area="" asp-controller="Account" asp-action="Login" asp-route-returnUrl="@Context.Request.Path">Log in</a> to review this product.</p>
+            }
+        </div>
     </div>
 </section>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
